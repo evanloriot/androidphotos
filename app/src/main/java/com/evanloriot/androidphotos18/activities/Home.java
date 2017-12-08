@@ -1,7 +1,7 @@
-package com.evanloriot.androidphotos18;
+package com.evanloriot.androidphotos18.activities;
 
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,12 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import java.util.ArrayList;
 import android.view.View.OnClickListener;
 import android.view.View;
 
+import com.evanloriot.androidphotos18.R;
 import com.evanloriot.androidphotos18.models.Album;
 import com.evanloriot.androidphotos18.models.User;
 
@@ -50,7 +50,7 @@ public class Home extends AppCompatActivity {
         albumsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO open album
+                selectAlbum((Album) adapterView.getItemAtPosition(i));
             }
         });
 
@@ -256,6 +256,13 @@ public class Home extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void selectAlbum(Album album){
+        Intent albumIntent = new Intent(this, AlbumView.class);
+        albumIntent.putExtra("user", user);
+        albumIntent.putExtra("album", album);
+        startActivity(albumIntent);
     }
 
     private User getUser(){

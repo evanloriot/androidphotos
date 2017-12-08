@@ -3,6 +3,9 @@
     <string name="createAlbum">Create Album</string>
     <string name="renameAlbum">Rename Album</string>
     <string name="deleteAlbum">Delete Album</string>
+    <string name="addPhoto">Add Photo</string>
+    <string name="movePhoto">Move Photo</string>
+    <string name="deletePhoto">Delete Photo</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="rename">Rename</string>

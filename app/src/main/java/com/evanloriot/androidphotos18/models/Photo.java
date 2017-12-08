@@ -1,5 +1,10 @@
 package com.evanloriot.androidphotos18.models;
 
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,21 +24,13 @@ public class Photo implements Serializable{
      */
     private static final long serialVersionUID = 1L;
     /**
-     * The caption associated with the photo.
-     */
-    public String caption;
-    /**
-     * The date of the photo.
-     */
-    public Date captureDate;
-    /**
      * The list of tags associated with the photo.
      */
     public ArrayList<String> tags;
     /**
      * The location of the photo.
      */
-    public String location;
+    public Uri location;
     /**
      * The album that is associated with the photo.
      */
@@ -46,24 +43,10 @@ public class Photo implements Serializable{
      * @param location The location of the photo.
      * @param instance number of photo in album if duplicate
      */
-    public Photo(String location, int instance) {
+    public Photo(Uri location, int instance) {
         this.location = location;
-        caption = "";
         tags = new ArrayList<String>();
-        File file = new File(location.isEmpty() ? "" : getAbsolutePath());
-        captureDate = new Date(file.lastModified());
         this.instance = instance;
-    }
-
-    public String getAbsolutePath() {
-        String path = location.substring(8);
-        String[] parts = path.split("/");
-        path = "";
-        for(int i = 0; i < parts.length; i++) {
-            path += parts[i];
-            path += File.separator + File.separator;
-        }
-        return path;
     }
 
     /**

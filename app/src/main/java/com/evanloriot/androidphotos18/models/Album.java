@@ -51,7 +51,7 @@ public class Album implements Serializable{
      * @param location The location of the photo being added to the album.
      * @return Photo -- instance of photo object added to album
      */
-    public Photo addPhoto(Uri location) {
+    public Photo addPhoto(String location) {
         int instance = 1;
         for(int i = 0; i < photos.size(); i++) {
             if(photos.get(i).location.equals(location)) {
@@ -69,7 +69,7 @@ public class Album implements Serializable{
      * @param location The location of the photo being removed from the album.
      * @param instance the instance number of the photo in album if duplicate.
      */
-    public void deletePhoto(Uri location, int instance) {
+    public void deletePhoto(String location, int instance) {
         for(int i = 0; i < photos.size(); i++) {
             if(location.equals(photos.get(i).location) && instance == photos.get(i).instance) {
                 photos.remove(i);

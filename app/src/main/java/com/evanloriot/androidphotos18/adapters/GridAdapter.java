@@ -1,6 +1,7 @@
 package com.evanloriot.androidphotos18.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +47,13 @@ public class GridAdapter extends BaseAdapter {
         if(convertView == null){
             convertView = inflater.inflate(R.layout.album_grid_item, null);
         }
+        else{
+            convertView.findViewById(R.id.check).setVisibility(View.GONE);
+        }
         ImageView thumb = (ImageView) convertView.findViewById(R.id.photo_thumb);
-        thumb.setImageURI(photos.get(position).location);
+        Uri u = photos.get(position).getUri();
+        thumb.setImageURI(null);
+        thumb.setImageURI(u);
         return convertView;
     }
 }

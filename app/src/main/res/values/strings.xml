@@ -12,6 +12,9 @@
     <string name="tagsLabel">Tags:</string>
     <string name="addTag">Add Tag</string>
     <string name="deleteTag">Delete Tag</string>
+    <string name="search">Search Photos</string>
+    <string name="searchButton">Search</string>
+    <string name="searchLabel">Search Tags: </string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="rename">Rename</string>

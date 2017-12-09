@@ -22,9 +22,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.evanloriot.androidphotos18.PhotoView;
 import com.evanloriot.androidphotos18.R;
-import com.evanloriot.androidphotos18.adapters.GridAdapter;
+import com.evanloriot.androidphotos18.adapters.HomeGridAdapter;
 import com.evanloriot.androidphotos18.models.Album;
 import com.evanloriot.androidphotos18.models.Photo;
 import com.evanloriot.androidphotos18.models.User;
@@ -35,7 +34,7 @@ public class AlbumView extends AppCompatActivity {
 
     private GridView photosGrid;
     private ArrayList<Photo> photos;
-    GridAdapter adapter;
+    HomeGridAdapter adapter;
 
     private Button addPhoto;
     private Button movePhoto;
@@ -75,7 +74,7 @@ public class AlbumView extends AppCompatActivity {
         photosGrid = (GridView) findViewById(R.id.photos);
         photos = user.getAlbum(album.name).photos;
 
-        adapter = new GridAdapter(this, photos);
+        adapter = new HomeGridAdapter(this, photos);
         photosGrid.setAdapter(adapter);
 
         photosGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

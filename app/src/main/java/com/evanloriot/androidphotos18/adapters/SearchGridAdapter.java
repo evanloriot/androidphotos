@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by Evan on 12/8/2017.
  */
 
-public class GridAdapter extends BaseAdapter {
+public class SearchGridAdapter extends BaseAdapter {
 
     private Context context;
 
@@ -25,7 +25,7 @@ public class GridAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
 
-    public GridAdapter(Context context, ArrayList<Photo> photos){
+    public SearchGridAdapter(Context context, ArrayList<Photo> photos){
         this.context = context;
         this.photos = photos;
         inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -45,10 +45,7 @@ public class GridAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent){
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.album_grid_item, null);
-        }
-        else{
-            convertView.findViewById(R.id.check).setVisibility(View.GONE);
+            convertView = inflater.inflate(R.layout.search_grid_item, null);
         }
         ImageView thumb = (ImageView) convertView.findViewById(R.id.photo_thumb);
         Uri u = photos.get(position).getUri();

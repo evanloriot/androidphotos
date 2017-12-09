@@ -1,5 +1,6 @@
 package com.evanloriot.androidphotos18.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import android.view.View.OnClickListener;
 import android.view.View;
@@ -297,8 +300,23 @@ public class Home extends AppCompatActivity {
         if(user != null){
             return user;
         }
-        //serial TODO
-        return new User("me");
+
+        try{
+            return SerialUtils.readContextFromFile(this.getBaseContext());
+        } catch (IOException e){
+            e.printStackTrace();
+            try {
+                User u = new User("user");
+                SerialUtils.writeContextToFile(this.getBaseContext(), u);
+                return u;
+            } catch (IOException ee) {
+                ee.printStackTrace();
+            }
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private boolean doesAlbumExist(String name) {
@@ -316,37 +334,48 @@ public class Home extends AppCompatActivity {
             return user.getAlbums();
         }
         //TODO remove this
-        ArrayList<Album> output = new ArrayList<Album>();
-        output.add(new Album("Album 1"));
-        output.add(new Album("Album 2"));
-        output.add(new Album("Album 3"));
-        output.add(new Album("Album 4"));
-        output.add(new Album("Album 5"));
-        output.add(new Album("Album 6"));
-        output.add(new Album("Album 7"));
-        output.add(new Album("Album 8"));
-        output.add(new Album("Album 9"));
-        output.add(new Album("Album 10"));
-        output.add(new Album("Album 11"));
-        output.add(new Album("Album 12"));
-        user.albums = output;
+//        ArrayList<Album> output = new ArrayList<Album>();
+//        output.add(new Album("Album 1"));
+//        output.add(new Album("Album 2"));
+//        output.add(new Album("Album 3"));
+//        output.add(new Album("Album 4"));
+//        output.add(new Album("Album 5"));
+//        output.add(new Album("Album 6"));
+//        output.add(new Album("Album 7"));
+//        output.add(new Album("Album 8"));
+//        output.add(new Album("Album 9"));
+//        output.add(new Album("Album 10"));
+//        output.add(new Album("Album 11"));
+//        output.add(new Album("Album 12"));
+//        user.albums = output;
         return user.getAlbums();
     }
 
     private void addAlbum(String name){
-        Album newAlbum = new Album(name);
-        user.addAlbum(newAlbum);
-        //NOTE: Albums points to same object as user.albums
-        //serialize TODO
+        try {
+            Album newAlbum = new Album(name);
+            user.addAlbum(newAlbum);
+            SerialUtils.writeContextToFile(this.getBaseContext(), user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void renameAlbum(String name, String newName){
-        user.renameAlbum(name, newName);
-        //serialize TODO
+        try {
+            user.renameAlbum(name, newName);
+            SerialUtils.writeContextToFile(this.getBaseContext(), user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void deleteAlbum(String album){
-        user.deleteAlbum(album);
-        //serialize TODO
+        try {
+            user.deleteAlbum(album);
+            SerialUtils.writeContextToFile(this.getBaseContext(), user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

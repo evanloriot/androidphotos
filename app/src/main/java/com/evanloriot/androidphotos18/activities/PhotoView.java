@@ -24,6 +24,7 @@ import com.evanloriot.androidphotos18.models.Album;
 import com.evanloriot.androidphotos18.models.Photo;
 import com.evanloriot.androidphotos18.models.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class PhotoView extends AppCompatActivity {
@@ -183,10 +184,20 @@ public class PhotoView extends AppCompatActivity {
     }
 
     public void addTag(String tag){
-        photoObj.addTag(tag);
+        try {
+            photoObj.addTag(tag);
+            SerialUtils.writeContextToFile(this.getBaseContext(), user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteTag(String tag){
-        photoObj.deleteTag(tag);
+        try {
+            photoObj.deleteTag(tag);
+            SerialUtils.writeContextToFile(this.getBaseContext(), user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

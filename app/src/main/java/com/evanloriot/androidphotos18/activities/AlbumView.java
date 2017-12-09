@@ -28,6 +28,7 @@ import com.evanloriot.androidphotos18.models.Album;
 import com.evanloriot.androidphotos18.models.Photo;
 import com.evanloriot.androidphotos18.models.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AlbumView extends AppCompatActivity {
@@ -310,17 +311,32 @@ public class AlbumView extends AppCompatActivity {
     }
 
     public void addPhoto(String location){
-        Photo p = user.getAlbum(album.name).addPhoto(location);
-        p.album = album;
+        try {
+            Photo p = user.getAlbum(album.name).addPhoto(location);
+            p.album = album;
+            SerialUtils.writeContextToFile(this.getBaseContext(), user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void movePhotoToAlbum(Photo p, String albumName){
-        user.getAlbum(albumName).addPhoto(p.location);
-        deletePhoto(p.location, p.instance);
+        try {
+            user.getAlbum(albumName).addPhoto(p.location);
+            deletePhoto(p.location, p.instance);
+            SerialUtils.writeContextToFile(this.getBaseContext(), user);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void deletePhoto(String location, int instance){
-        album.deletePhoto(location, instance);
+        try {
+            album.deletePhoto(location, instance);
+            SerialUtils.writeContextToFile(this.getBaseContext(), user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void removeFromSelected(Photo p){

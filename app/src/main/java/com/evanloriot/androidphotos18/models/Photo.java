@@ -68,6 +68,26 @@ public class Photo implements Serializable{
         tags.add(tag);
     }
 
+    public static boolean isTagFormatted(String tag){
+        String[] text = tag.split("=");
+        if(text.length != 2){
+            return false;
+        }
+        if(text[0].equals("location") || text[0].equals("person")){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean doesTagExist(String s){
+        for(int i = 0; i < tags.size(); i++){
+            if(tags.get(i).equals(s)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Removes a tag from the photo object.
      * @param tag Removes a tag associated with the photo.

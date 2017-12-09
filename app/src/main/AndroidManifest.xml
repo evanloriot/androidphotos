@@ -18,11 +18,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AlbumView"
+        <activity
+            android:name=".activities.AlbumView"
             android:parentActivityName=".activities.Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.Home" />
+        </activity>
+        <activity
+            android:name=".activities.Slideshow"
+            android:parentActivityName=".activities.AlbumView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.AlbumView" />
+        </activity>
+        <activity
+            android:name=".PhotoView"
+            android:parentActivityName=".activities.AlbumView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.AlbumView" />
         </activity>
     </application>
 

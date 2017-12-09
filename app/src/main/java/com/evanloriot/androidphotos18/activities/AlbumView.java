@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +22,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.evanloriot.androidphotos18.PhotoView;
 import com.evanloriot.androidphotos18.R;
 import com.evanloriot.androidphotos18.adapters.GridAdapter;
 import com.evanloriot.androidphotos18.models.Album;
@@ -40,6 +40,7 @@ public class AlbumView extends AppCompatActivity {
     private Button addPhoto;
     private Button movePhoto;
     private Button deletePhoto;
+    private Button slideshow;
 
     private static int RESULT_LOAD_IMAGE = 1;
 
@@ -77,6 +78,16 @@ public class AlbumView extends AppCompatActivity {
         adapter = new GridAdapter(this, photos);
         photosGrid.setAdapter(adapter);
 
+        photosGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent photoIntent = new Intent(view.getContext(), PhotoView.class);
+                photoIntent.putExtra("user", user);
+                photoIntent.putExtra("photo", (Photo) adapterView.getItemAtPosition(i));
+                startActivity(photoIntent);
+            }
+        });
+
         photosGrid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -90,7 +101,7 @@ public class AlbumView extends AppCompatActivity {
                     iv.setVisibility(View.GONE);
                     removeFromSelected(p);
                 }
-                return false;
+                return true;
             }
         });
 
@@ -228,6 +239,31 @@ public class AlbumView extends AppCompatActivity {
                 }
             }
         });
+
+        slideshow = (Button) findViewById(R.id.slideshow);
+        slideshow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(photos.size() == 0){
+                    AlertDialog alertDialog = new AlertDialog.Builder(view.getContext()).create();
+                    alertDialog.setTitle("No Photos");
+                    alertDialog.setMessage("Please add photos to album.");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialog.show();
+                    return;
+                }
+                else {
+                    Intent slideshowIntent = new Intent(view.getContext(), Slideshow.class);
+                    slideshowIntent.putExtra("user", user);
+                    slideshowIntent.putExtra("album", album);
+                    startActivity(slideshowIntent);
+                }
+            }
+        });
     }
 
     @Override
@@ -252,7 +288,6 @@ public class AlbumView extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent returnIntent = new Intent(this, Home.class);

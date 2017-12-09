@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.evanloriot.androidphotos18.activities.Slideshow">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/albumToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout1"
+        android:layout_width="368dp"
+        android:layout_height="460dp"
+        app:layout_constraintBottom_toTopOf="@id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumToolbar"
+        app:layout_constraintVertical_bias="0.089">
+
+        <ImageView
+            android:id="@+id/slide"
+            android:layout_width="352dp"
+            android:layout_height="551dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="368dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout2"
+        app:layout_constraintVertical_bias="1.0">
+
+        <Button
+            android:id="@+id/left"
+            android:layout_width="189dp"
+            android:layout_height="wrap_content"
+            android:text="@string/left"
+            app:layout_constraintRight_toLeftOf="@id/right" />
+
+        <Button
+            android:id="@+id/right"
+            android:layout_width="189dp"
+            android:layout_height="wrap_content"
+            android:text="@string/right"
+            app:layout_constraintLeft_toRightOf="@id/left" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

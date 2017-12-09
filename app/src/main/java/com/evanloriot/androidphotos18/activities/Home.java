@@ -68,7 +68,6 @@ public class Home extends AppCompatActivity {
         createAlbum.setOnClickListener(new OnClickListener(){
             String albumName;
 
-            //final? TODO
             public void onClick(final View v){
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Create Album");
@@ -82,7 +81,15 @@ public class Home extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         albumName = input.getText().toString();
                         if(albumName.length() == 0){
-                            //error TODO
+                            AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                            alertDialog.setTitle("No Album Name");
+                            alertDialog.setMessage("Please enter an album name when creating an album.");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            alertDialog.show();
                         }
                         else{
                             if(doesAlbumExist(albumName)){

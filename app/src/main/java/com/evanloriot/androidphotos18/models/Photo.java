@@ -2,11 +2,17 @@ package com.evanloriot.androidphotos18.models;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,7 +36,7 @@ public class Photo implements Serializable{
     /**
      * The location of the photo.
      */
-    public Uri location;
+    public String location;
     /**
      * The album that is associated with the photo.
      */
@@ -43,10 +49,15 @@ public class Photo implements Serializable{
      * @param location The location of the photo.
      * @param instance number of photo in album if duplicate
      */
-    public Photo(Uri location, int instance) {
+    public Photo(String location, int instance) {
         this.location = location;
         tags = new ArrayList<String>();
         this.instance = instance;
+    }
+
+    public Uri getUri(){
+        Uri image = Uri.parse(location);
+        return image;
     }
 
     /**
@@ -55,6 +66,26 @@ public class Photo implements Serializable{
      */
     public void addTag(String tag) {
         tags.add(tag);
+    }
+
+    public static boolean isTagFormatted(String tag){
+        String[] text = tag.split("=");
+        if(text.length != 2){
+            return false;
+        }
+        if(text[0].equals("location") || text[0].equals("person")){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean doesTagExist(String s){
+        for(int i = 0; i < tags.size(); i++){
+            if(tags.get(i).equals(s)){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

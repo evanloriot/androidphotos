@@ -6,7 +6,14 @@
     <string name="addPhoto">Add Photo</string>
     <string name="movePhoto">Move Photo</string>
     <string name="deletePhoto">Delete Photo</string>
+    <string name="slideshow">Play Slideshow</string>
+    <string name="left">&lt;</string>
+    <string name="right">&gt;</string>
+    <string name="tagsLabel">Tags:</string>
+    <string name="addTag">Add Tag</string>
+    <string name="deleteTag">Delete Tag</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="rename">Rename</string>
+    <string name="move">Move</string>
 </resources>

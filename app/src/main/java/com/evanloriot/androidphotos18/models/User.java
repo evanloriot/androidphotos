@@ -13,7 +13,7 @@ public class User implements Serializable{
     /**
      * Need for implementation of Serializable.
      */
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = 1L;
     /**
      * The name of the user.
      */

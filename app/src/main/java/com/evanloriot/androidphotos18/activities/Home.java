@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.widget.AdapterView;
@@ -38,7 +39,16 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        user = getUser();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.homeToolbar);
+        setSupportActionBar(toolbar);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            user = (User) extras.get("user");
+        }
+        else{
+            user = getUser();
+        }
 
         //Begin
         albumsListView = (ListView) findViewById(R.id.albums);
@@ -58,7 +68,6 @@ public class Home extends AppCompatActivity {
         createAlbum.setOnClickListener(new OnClickListener(){
             String albumName;
 
-            //final? TODO
             public void onClick(final View v){
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Create Album");
@@ -72,7 +81,15 @@ public class Home extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         albumName = input.getText().toString();
                         if(albumName.length() == 0){
-                            //error TODO
+                            AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                            alertDialog.setTitle("No Album Name");
+                            alertDialog.setMessage("Please enter an album name when creating an album.");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            alertDialog.show();
                         }
                         else{
                             if(doesAlbumExist(albumName)){
@@ -266,6 +283,9 @@ public class Home extends AppCompatActivity {
     }
 
     private User getUser(){
+        if(user != null){
+            return user;
+        }
         //serial TODO
         return new User("me");
     }
@@ -280,6 +300,10 @@ public class Home extends AppCompatActivity {
     }
 
     private ArrayList<Album> getAlbums(){
+        //remove second condition lol
+        if(user != null && user.getAlbums().size() != 0){
+            return user.getAlbums();
+        }
         //TODO remove this
         ArrayList<Album> output = new ArrayList<Album>();
         output.add(new Album("Album 1"));

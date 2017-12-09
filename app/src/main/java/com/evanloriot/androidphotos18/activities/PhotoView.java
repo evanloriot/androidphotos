@@ -39,6 +39,8 @@ public class PhotoView extends AppCompatActivity {
     User user;
     Photo photoObj;
     ArrayList<String> tagsArray;
+    String back;
+    String backParameters;
 
     String selectedTag;
 
@@ -57,6 +59,8 @@ public class PhotoView extends AppCompatActivity {
         user = (User) extras.get("user");
         Photo p = (Photo) extras.get("photo");
         photoObj = (Photo) user.getAlbum(p.album.name).getPhoto(p.location, p.instance);
+        back = (String) extras.get("back");
+        backParameters = (String) extras.get("backParameters");
 
         photo = (ImageView) findViewById(R.id.photo);
         photo.setImageURI(photoObj.getUri());
@@ -172,12 +176,22 @@ public class PhotoView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent returnIntent = new Intent(this, AlbumView.class);
-                returnIntent.putExtra("user", user);
-                returnIntent.putExtra("album", user.getAlbum(photoObj.album.name));
-                startActivity(returnIntent);
-                this.finish();
-                return true;
+                if(back.equals("search")){
+                    Intent returnIntent = new Intent(this, SearchView.class);
+                    returnIntent.putExtra("user", user);
+                    returnIntent.putExtra("backParameters", backParameters);
+                    startActivity(returnIntent);
+                    this.finish();
+                    return true;
+                }
+                else if(back.equals("album")) {
+                    Intent returnIntent = new Intent(this, AlbumView.class);
+                    returnIntent.putExtra("user", user);
+                    returnIntent.putExtra("album", user.getAlbum(photoObj.album.name));
+                    startActivity(returnIntent);
+                    this.finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

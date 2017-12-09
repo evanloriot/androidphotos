@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -49,10 +50,27 @@ public class SearchView extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         user = (User) extras.get("user");
+        searchParameters = (String) extras.get("backParameters");
 
         parameters = (EditText) findViewById(R.id.parameters);
 
+        if(searchParameters != null){
+            parameters.setText(searchParameters);
+        }
+
         searchResults = (GridView) findViewById(R.id.searchResults);
+
+        searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent photoIntent = new Intent(view.getContext(), PhotoView.class);
+                photoIntent.putExtra("user", user);
+                photoIntent.putExtra("photo", (Photo) adapterView.getItemAtPosition(i));
+                photoIntent.putExtra("back", "search");
+                photoIntent.putExtra("backParameters", searchParameters);
+                startActivity(photoIntent);
+            }
+        });
 
         photos = new ArrayList<Photo>();
         adapter = new SearchGridAdapter(this, photos);
@@ -93,6 +111,10 @@ public class SearchView extends AppCompatActivity {
                 }
             }
         });
+
+        if(searchParameters != null){
+            search.performClick();
+        }
 
     }
 

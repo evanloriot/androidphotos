@@ -18,7 +18,6 @@ import android.view.View.OnClickListener;
 import android.view.View;
 
 import com.evanloriot.androidphotos18.R;
-import com.evanloriot.androidphotos18.SearchView;
 import com.evanloriot.androidphotos18.models.Album;
 import com.evanloriot.androidphotos18.models.User;
 

@@ -40,7 +40,7 @@
                 android:value=".activities.AlbumView" />
         </activity>
         <activity
-            android:name=".SearchView"
+            android:name=".activities.SearchView"
             android:parentActivityName=".activities.Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

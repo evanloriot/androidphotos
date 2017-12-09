@@ -1,4 +1,4 @@
-package com.evanloriot.androidphotos18;
+package com.evanloriot.androidphotos18.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 
+import com.evanloriot.androidphotos18.R;
 import com.evanloriot.androidphotos18.activities.AlbumView;
 import com.evanloriot.androidphotos18.activities.Home;
 import com.evanloriot.androidphotos18.adapters.HomeGridAdapter;

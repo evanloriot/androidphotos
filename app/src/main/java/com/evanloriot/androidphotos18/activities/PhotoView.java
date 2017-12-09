@@ -1,4 +1,4 @@
-package com.evanloriot.androidphotos18;
+package com.evanloriot.androidphotos18.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.evanloriot.androidphotos18.R;
 import com.evanloriot.androidphotos18.activities.AlbumView;
 import com.evanloriot.androidphotos18.activities.Home;
 import com.evanloriot.androidphotos18.models.Album;
@@ -53,7 +54,8 @@ public class PhotoView extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         user = (User) extras.get("user");
-        photoObj = (Photo) extras.get("photo");
+        Photo p = (Photo) extras.get("photo");
+        photoObj = (Photo) user.getAlbum(p.album.name).getPhoto(p.location, p.instance);
 
         photo = (ImageView) findViewById(R.id.photo);
         photo.setImageURI(photoObj.getUri());

@@ -18,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.view.View;
 
 import com.evanloriot.androidphotos18.R;
+import com.evanloriot.androidphotos18.SearchView;
 import com.evanloriot.androidphotos18.models.Album;
 import com.evanloriot.androidphotos18.models.User;
 
@@ -29,6 +30,7 @@ public class Home extends AppCompatActivity {
     private Button createAlbum;
     private Button renameAlbum;
     private Button deleteAlbum;
+    private Button search;
 
     Album selected;
 
@@ -270,6 +272,16 @@ public class Home extends AppCompatActivity {
                 });
 
                 dialog.show();
+            }
+        });
+
+        search = (Button) findViewById(R.id.search);
+        search.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent searchIntent = new Intent(view.getContext(), SearchView.class);
+                searchIntent.putExtra("user", user);
+                startActivity(searchIntent);
             }
         });
 

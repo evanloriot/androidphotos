@@ -33,11 +33,18 @@
                 android:value=".activities.AlbumView" />
         </activity>
         <activity
-            android:name=".PhotoView"
+            android:name=".activities.PhotoView"
             android:parentActivityName=".activities.AlbumView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.AlbumView" />
+        </activity>
+        <activity
+            android:name=".SearchView"
+            android:parentActivityName=".activities.Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.Home" />
         </activity>
     </application>
 

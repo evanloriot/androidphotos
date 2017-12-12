@@ -84,6 +84,7 @@ public class AlbumView extends AppCompatActivity {
                 Intent photoIntent = new Intent(view.getContext(), PhotoView.class);
                 photoIntent.putExtra("user", user);
                 photoIntent.putExtra("photo", (Photo) adapterView.getItemAtPosition(i));
+                photoIntent.putExtra("back", "album");
                 startActivity(photoIntent);
             }
         });
